@@ -433,6 +433,13 @@ export class Utils {
         });
         return this;
     }
+
+    remove() {
+        this.each((el) => {
+            el.parentNode.removeChild(el);
+        });
+        return this;
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
