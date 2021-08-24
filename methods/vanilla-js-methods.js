@@ -279,6 +279,19 @@ export class Utils {
         });
         return this;
     }
+
+    unwrap() {
+        this.each((el) => {
+            const elParentNode = el.parentNode;
+
+            if (elParentNode !== document.body) {
+                elParentNode.parentNode.insertBefore(el, elParentNode);
+                elParentNode.parentNode.removeChild(elParentNode);
+            }
+        });
+        return this;
+    }
+
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
