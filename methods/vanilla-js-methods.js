@@ -155,6 +155,10 @@ export class Utils {
         }
         return this.element.hasAttribute(attribute);
     }
+
+    data(name, value) {
+        return this.attr(`data-${name}`, value);
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
