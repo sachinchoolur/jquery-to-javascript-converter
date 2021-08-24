@@ -208,6 +208,13 @@ export class Utils {
         }
         return this.element.classList.contains(className);
     }
+
+    toggleClass(className) {
+        if (!this.element) {
+            return this;
+        }
+        this.element.classList.toggle(className);
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
