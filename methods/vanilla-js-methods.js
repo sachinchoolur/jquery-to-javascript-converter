@@ -220,6 +220,12 @@ export class Utils {
         return new Utils(Utils.getSelector(selector, this.element));
     }
 
+    first() {
+        if (this.elements && this.elements.length !== undefined) {
+            return new Utils(this.elements[0]);
+        }
+        return new Utils(this.elements);
+    }
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
