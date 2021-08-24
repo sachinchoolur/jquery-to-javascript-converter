@@ -27,6 +27,13 @@ export class Utils {
         }
         return this;
     }
+
+    prev() {
+        if (!this.element) {
+            return this;
+        }
+        return new Utils(this.element.previousElementSibling);
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
