@@ -191,6 +191,16 @@ export class Utils {
         });
         return this;
     }
+
+    removeClass(classNames) {
+        this.each((el) => {
+            // IE doesn't support multiple arguments
+            classNames.split(' ').forEach((className) => {
+                el.classList.remove(className);
+            });
+        });
+        return this;
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
