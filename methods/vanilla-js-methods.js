@@ -260,6 +260,15 @@ export class Utils {
         );
         return new Utils(elements);
     }
+
+    index() {
+        if (!this.element) return -1;
+        let i = 0;
+        do {
+            i++;
+        } while ((this.element = this.element.previousElementSibling));
+        return i;
+    }
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
