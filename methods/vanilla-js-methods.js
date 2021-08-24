@@ -407,6 +407,10 @@ export class Utils {
             el.style.display = '';
         });
     }
+
+    clone() {
+        return new Utils(this.getFirstEl().cloneNode(true));
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
