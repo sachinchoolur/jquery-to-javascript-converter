@@ -201,6 +201,13 @@ export class Utils {
         });
         return this;
     }
+
+    hasClass(className) {
+        if (!this.element) {
+            return false;
+        }
+        return this.element.classList.contains(className);
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
