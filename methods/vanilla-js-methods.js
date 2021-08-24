@@ -534,6 +534,14 @@ export class Utils {
                 document.documentElement.clientLeft,
         };
     }
+
+    position() {
+        return {
+            left: this.element.offsetLeft,
+            top: this.element.offsetTop,
+        };
+    }
+
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
