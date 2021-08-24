@@ -382,6 +382,19 @@ export class Utils {
         });
         return this;
     }
+
+    text(text) {
+        if (text === undefined) {
+            if (!this.element) {
+                return '';
+            }
+            return this.element.textContent;
+        }
+        this.each((el) => {
+            el.textContent = text;
+        });
+        return this;
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
