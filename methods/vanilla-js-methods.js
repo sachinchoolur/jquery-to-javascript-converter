@@ -148,6 +148,13 @@ export class Utils {
         });
         return this;
     }
+
+    hasAttribute(attribute) {
+        if (!this.element) {
+            return false;
+        }
+        return this.element.hasAttribute(attribute);
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
