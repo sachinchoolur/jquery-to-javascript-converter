@@ -159,6 +159,28 @@ export class Utils {
     data(name, value) {
         return this.attr(`data-${name}`, value);
     }
+
+    css(css, value) {
+        if (value !== undefined) {
+            this.each((el) => {
+                Utils.setCss(el, css, value);
+            });
+            return this;
+        }
+        if (typeof css === 'object') {
+            for (const property in css) {
+                if (Object.prototype.hasOwnProperty.call(css, property)) {
+                    this.each((el) => {
+                        Utils.setCss(el, property, css[property]);
+                    });
+                }
+            }
+            return this;
+        }
+        const cssProp = Utils.camelCase(css);
+        const property = Utils.styleSupport(cssProp);
+        return getComputedStyle(this.element)[property];
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
@@ -180,6 +202,41 @@ export class Utils {
             return document.getElementById(id);
         }
         return context.querySelectorAll(selector);
+    }
+
+    static styleSupport(prop) {
+        let vendorProp;
+        let supportedProp;
+        const capProp = prop.charAt(0).toUpperCase() + prop.slice(1);
+        const prefixes = ['Moz', 'Webkit', 'O', 'ms'];
+        let div = document.createElement('div');
+
+        if (prop in div.style) {
+            supportedProp = prop;
+        } else {
+            for (let i = 0; i < prefixes.length; i++) {
+                vendorProp = prefixes[i] + capProp;
+                if (vendorProp in div.style) {
+                    supportedProp = vendorProp;
+                    break;
+                }
+            }
+        }
+
+        div = null;
+        return supportedProp;
+    }
+
+    // https://gist.github.com/cballou/4007063
+    static setCss(el, prop, value) {
+        // prettier-ignore
+        let cssProperty = Utils.camelCase(prop);
+        cssProperty = Utils.styleSupport(cssProperty);
+        el.style[cssProperty] = value;
+    }
+
+    static camelCase(text) {
+        return text.replace(/-([a-z])/gi, (s, group1) => group1.toUpperCase());
     }
     /* $$ Template END $$ */
 }
