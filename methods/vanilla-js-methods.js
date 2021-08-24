@@ -370,6 +370,18 @@ export class Utils {
         return this;
     }
 
+    html(html) {
+        if (html === undefined) {
+            if (!this.element) {
+                return '';
+            }
+            return this.element.innerHTML;
+        }
+        this.each((el) => {
+            el.innerHTML = html;
+        });
+        return this;
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
