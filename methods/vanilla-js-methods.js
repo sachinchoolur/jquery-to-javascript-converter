@@ -473,6 +473,23 @@ export class Utils {
         const style = window.getComputedStyle(this.element, null);
         return parseFloat(style.width.replace('px', ''));
     }
+
+    // Outer Width With Margin if margin is true
+    outerWidth(margin) {
+        if (!this.element) {
+            return 0;
+        }
+        if (margin !== undefined) {
+            let width = this.element.offsetWidth;
+            const style = window.getComputedStyle(this.element);
+
+            width +=
+                parseInt(style.marginLeft, 10) +
+                parseInt(style.marginRight, 10);
+            return width;
+        }
+        return this.element.offsetWidth;
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
