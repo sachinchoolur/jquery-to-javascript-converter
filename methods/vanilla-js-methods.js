@@ -514,6 +514,26 @@ export class Utils {
         }
         return this.element.offsetHeight;
     }
+
+    offset() {
+        if (!this.element) {
+            return {
+                left: 0,
+                top: 0,
+            };
+        }
+        const box = this.element.getBoundingClientRect();
+        return {
+            top:
+                box.top +
+                window.pageYOffset -
+                document.documentElement.clientTop,
+            left:
+                box.left +
+                window.pageXOffset -
+                document.documentElement.clientLeft,
+        };
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
