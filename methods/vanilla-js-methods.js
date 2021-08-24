@@ -181,6 +181,16 @@ export class Utils {
         const property = Utils.styleSupport(cssProp);
         return getComputedStyle(this.element)[property];
     }
+
+    addClass(classNames = '') {
+        this.each((el) => {
+            // IE doesn't support multiple arguments
+            classNames.split(' ').forEach((className) => {
+                el.classList.add(className);
+            });
+        });
+        return this;
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
