@@ -241,6 +241,11 @@ export class Utils {
         }
         return new Utils(this.element.offsetParent);
     }
+
+    children() {
+        return new Utils(this.element.children);
+    }
+
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
