@@ -215,6 +215,120 @@ export class Utils {
         }
         this.element.classList.toggle(className);
     }
+    on(events, listener) {
+        events.split(' ').forEach((eventName) => {
+            this.each((el) => {
+                const tNEventName = Utils.setEventName(el, eventName);
+                if (!Array.isArray(Utils.eventListeners[tNEventName])) {
+                    Utils.eventListeners[tNEventName] = [];
+                }
+                Utils.eventListeners[tNEventName].push(listener);
+
+                // https://github.com/microsoft/TypeScript/issues/28357
+                if (el) {
+                    el.addEventListener(eventName.split('.')[0], listener);
+                }
+            });
+        });
+
+        return this;
+    }
+
+    one(event, listener) {
+        this.each((el) => {
+            new Utils(el).on(event, () => {
+                new Utils(el).off(event);
+                listener(event);
+            });
+        });
+        return this;
+    }
+
+    off(eventNames) {
+        Object.keys(Utils.eventListeners).forEach((tNEventName) => {
+            const currentEventName = Utils.getEventNameFromId(tNEventName);
+            eventNames.split(' ').forEach((eventName) => {
+                if (Utils.isEventMatched(eventName, currentEventName)) {
+                    this.each((el) => {
+                        if (
+                            Utils.getElementEventName(el, currentEventName) ===
+                            tNEventName
+                        ) {
+                            Utils.eventListeners[tNEventName].forEach(
+                                (listener) => {
+                                    el.removeEventListener(
+                                        currentEventName.split('.')[0],
+                                        listener
+                                    );
+                                }
+                            );
+                            delete Utils.eventListeners[tNEventName];
+                        }
+                    });
+                }
+            });
+        });
+        return this;
+    }
+
+    trigger(event, detail) {
+        if (!this.element) {
+            return this;
+        }
+        const eventName = event.split('.')[0];
+        const isNativeEvent =
+            typeof document.body[`on${eventName}`] !== 'undefined';
+        if (isNativeEvent) {
+            this.each((el) => {
+                el.dispatchEvent(new Event(eventName));
+            });
+            return this;
+        }
+        const customEvent = new CustomEvent(eventName, {
+            detail: detail || null,
+        });
+        this.each((el) => {
+            el.dispatchEvent(customEvent);
+        });
+        return this;
+    }
+
+    static generateUUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+            // eslint-disable-next-line no-bitwise
+            const r = (Math.random() * 16) | 0;
+            // eslint-disable-next-line no-bitwise
+            const v = c === 'x' ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+        });
+    }
+
+    static setEventName(el, eventName) {
+        // Need to verify https://stackoverflow.com/questions/1915341/whats-wrong-with-adding-properties-to-dom-element-objects
+        const elementUUId = el.eventEmitterUUID;
+        const uuid = elementUUId || Utils.generateUUID();
+        // eslint-disable-next-line no-param-reassign
+        el.eventEmitterUUID = uuid;
+        return Utils.getEventName(eventName, uuid);
+    }
+
+    static getElementEventName(el, eventName) {
+        const elementUUId = el.eventEmitterUUID;
+        /* istanbul ignore next */
+        const uuid = elementUUId || Utils.generateUUID();
+        // eslint-disable-next-line no-param-reassign
+        el.eventEmitterUUID = uuid;
+        return Utils.getEventName(eventName, uuid);
+    }
+
+    static getEventName(eventName, uuid) {
+        return `${eventName}__EVENT_EMITTER__${uuid}`;
+    }
+
+    static getEventNameFromId(eventName) {
+        return eventName.split('__EVENT_EMITTER__')[0];
+    }
+
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
@@ -272,6 +386,15 @@ export class Utils {
     static camelCase(text) {
         return text.replace(/-([a-z])/gi, (s, group1) => group1.toUpperCase());
     }
+
+    static isEventMatched(event, eventName) {
+        const eventNamespace = eventName.split('.');
+        return event
+            .split('.')
+            .filter((e) => e)
+            .every((e) => eventNamespace.indexOf(e) !== -1);
+    }
+
     /* $$ Template END $$ */
 }
 
