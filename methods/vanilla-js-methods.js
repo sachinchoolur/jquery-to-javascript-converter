@@ -230,6 +230,10 @@ export class Utils {
     eq(index) {
         return new Utils(this.elements[index]);
     }
+
+    parent() {
+        return new Utils(this.element.parentElement);
+    }
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
