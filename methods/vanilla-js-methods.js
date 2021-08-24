@@ -490,6 +490,30 @@ export class Utils {
         }
         return this.element.offsetWidth;
     }
+
+    height() {
+        if (!this.element) {
+            return 0;
+        }
+        const style = window.getComputedStyle(this.element, null);
+        return parseFloat(style.height.replace('px', ''));
+    }
+
+    outerHeight(margin) {
+        if (!this.element) {
+            return 0;
+        }
+        if (margin !== undefined) {
+            let height = this.element.offsetHeight;
+            const style = getComputedStyle(this.element);
+
+            height +=
+                parseInt(style.marginTop, 10) +
+                parseInt(style.marginBottom, 10);
+            return height;
+        }
+        return this.element.offsetHeight;
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
