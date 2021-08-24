@@ -215,6 +215,11 @@ export class Utils {
         }
         this.element.classList.toggle(className);
     }
+
+    find(selector) {
+        return new Utils(Utils.getSelector(selector, this.element));
+    }
+
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
