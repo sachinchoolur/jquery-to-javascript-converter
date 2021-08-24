@@ -422,6 +422,17 @@ export class Utils {
         });
         return this;
     }
+
+    prepend(html) {
+        this.each((el) => {
+            if (typeof html === 'string') {
+                el.insertAdjacentHTML('afterbegin', html);
+            } else {
+                el.insertBefore(html, el.firstChild);
+            }
+        });
+        return this;
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
