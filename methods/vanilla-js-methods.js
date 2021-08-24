@@ -465,6 +465,14 @@ export class Utils {
         }
         return this.element === (el.element || el);
     }
+
+    width() {
+        if (!this.element) {
+            return 0;
+        }
+        const style = window.getComputedStyle(this.element, null);
+        return parseFloat(style.width.replace('px', ''));
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
