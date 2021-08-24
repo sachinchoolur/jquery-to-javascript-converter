@@ -93,6 +93,30 @@ export class Utils {
         }
         return this;
     }
+
+    parentsUntil(selector, filter) {
+        if (!this.element) {
+            return this;
+        }
+        const result = [];
+        const matchesSelector =
+            this.element.matches ||
+            this.element.webkitMatchesSelector ||
+            this.element.mozMatchesSelector ||
+            this.element.msMatchesSelector;
+
+        // match start from parent
+        let el = this.element.parentElement;
+        while (el && !matchesSelector.call(el, selector)) {
+            if (!filter) {
+                result.push(el);
+            } else if (matchesSelector.call(el, filter)) {
+                result.push(el);
+            }
+            el = el.parentElement;
+        }
+        return new Utils(result);
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
