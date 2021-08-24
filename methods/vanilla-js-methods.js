@@ -451,6 +451,20 @@ export class Utils {
     contains(child) {
         return this.element !== child && this.element.contains(child);
     }
+
+    is(el) {
+        if (typeof el === 'string') {
+            return (
+                this.element.matches ||
+                this.element.matchesSelector ||
+                this.element.msMatchesSelector ||
+                this.element.mozMatchesSelector ||
+                this.element.webkitMatchesSelector ||
+                this.element.oMatchesSelector
+            ).call(this.element, el);
+        }
+        return this.element === (el.element || el);
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
