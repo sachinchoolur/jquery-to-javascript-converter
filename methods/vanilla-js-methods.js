@@ -269,6 +269,16 @@ export class Utils {
         } while ((this.element = this.element.previousElementSibling));
         return i;
     }
+
+    wrap(className) {
+        this.each((el) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = className;
+            el.parentNode.insertBefore(wrapper, el);
+            wrapper.appendChild(el);
+        });
+        return this;
+    }
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
