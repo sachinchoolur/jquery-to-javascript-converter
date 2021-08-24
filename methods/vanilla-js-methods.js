@@ -117,6 +117,16 @@ export class Utils {
         }
         return new Utils(result);
     }
+
+    val(value) {
+        if (!this.element) {
+            return '';
+        }
+        if (value === undefined) {
+            return this.element.value;
+        }
+        this.element.value = value;
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
