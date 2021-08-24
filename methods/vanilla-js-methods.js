@@ -250,6 +250,16 @@ export class Utils {
         return this.elements;
     }
 
+    siblings() {
+        if (!this.element) {
+            return this;
+        }
+        const elements = Array.prototype.filter.call(
+            this.element.parentNode.children,
+            (child) => child !== this.element
+        );
+        return new Utils(elements);
+    }
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
