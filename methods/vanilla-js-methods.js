@@ -411,6 +411,17 @@ export class Utils {
     clone() {
         return new Utils(this.getFirstEl().cloneNode(true));
     }
+
+    append(html) {
+        this.each((el) => {
+            if (typeof html === 'string') {
+                el.insertAdjacentHTML('beforeend', html);
+            } else {
+                el.appendChild(html);
+            }
+        });
+        return this;
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
