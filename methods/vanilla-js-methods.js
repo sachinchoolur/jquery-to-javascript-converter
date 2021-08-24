@@ -74,6 +74,25 @@ export class Utils {
         } while ((nextElem = nextElem.nextSibling));
         return new Utils(sibs);
     }
+
+    closest(selector) {
+        if (!this.element) {
+            return this;
+        }
+        const matchesSelector =
+            this.element.matches ||
+            this.element.webkitMatchesSelector ||
+            this.element.mozMatchesSelector ||
+            this.element.msMatchesSelector;
+
+        while (this.element) {
+            if (matchesSelector.call(this.element, selector)) {
+                return new Utils(this.element);
+            }
+            this.element = this.element.parentElement;
+        }
+        return this;
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
