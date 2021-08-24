@@ -234,6 +234,13 @@ export class Utils {
     parent() {
         return new Utils(this.element.parentElement);
     }
+
+    offsetParent() {
+        if (!this.element) {
+            return this;
+        }
+        return new Utils(this.element.offsetParent);
+    }
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
