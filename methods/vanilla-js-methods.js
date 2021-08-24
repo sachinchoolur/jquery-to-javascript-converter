@@ -447,6 +447,10 @@ export class Utils {
         });
         return this;
     }
+
+    contains(child) {
+        return this.element !== child && this.element.contains(child);
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
