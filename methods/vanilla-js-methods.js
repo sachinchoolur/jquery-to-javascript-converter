@@ -140,6 +140,14 @@ export class Utils {
         });
         return this;
     }
+
+    removeAttr(attributes) {
+        const attrs = attributes.split(' ');
+        this.each((el) => {
+            attrs.forEach((attr) => el.removeAttribute(attr));
+        });
+        return this;
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
