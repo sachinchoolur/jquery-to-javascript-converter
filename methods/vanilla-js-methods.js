@@ -55,6 +55,25 @@ export class Utils {
         }
         return new Utils(sibs);
     }
+
+    nextAll(filter) {
+        if (!this.element) {
+            return this;
+        }
+        const sibs = [];
+        let nextElem = this.element.parentNode.firstChild;
+        do {
+            if (nextElem.nodeType === 3) continue; // ignore text nodes
+            if (nextElem === this.element) continue; // ignore this.element of target
+            if (nextElem === this.element.nextElementSibling) {
+                if (!filter || filter(this.element)) {
+                    sibs.push(nextElem);
+                    this.element = nextElem;
+                }
+            }
+        } while ((nextElem = nextElem.nextSibling));
+        return new Utils(sibs);
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
