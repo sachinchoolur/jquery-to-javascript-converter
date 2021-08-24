@@ -41,6 +41,20 @@ export class Utils {
         }
         return new Utils(this.element.nextElementSibling);
     }
+
+    prevAll(filter) {
+        if (!this.element) {
+            return this;
+        }
+        const sibs = [];
+        while ((this.element = this.element.previousSibling)) {
+            if (this.element.nodeType === 3) {
+                continue; // ignore text nodes
+            }
+            if (!filter || filter(this.element)) sibs.push(this.element);
+        }
+        return new Utils(sibs);
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
