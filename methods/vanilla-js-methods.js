@@ -34,6 +34,13 @@ export class Utils {
         }
         return new Utils(this.element.previousElementSibling);
     }
+
+    next() {
+        if (!this.element) {
+            return this;
+        }
+        return new Utils(this.element.nextElementSibling);
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
