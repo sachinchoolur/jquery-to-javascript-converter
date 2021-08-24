@@ -246,6 +246,10 @@ export class Utils {
         return new Utils(this.element.children);
     }
 
+    get() {
+        return this.elements;
+    }
+
     on(events, listener) {
         events.split(' ').forEach((eventName) => {
             this.each((el) => {
