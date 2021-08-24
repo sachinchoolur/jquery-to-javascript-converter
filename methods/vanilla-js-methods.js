@@ -13,6 +13,20 @@ export class Utils {
         }
         return this.elements;
     }
+
+    each(func) {
+        if (!this.elements) {
+            return this;
+        }
+        if (this.elements.length !== undefined) {
+            [].slice.call(this.elements).forEach((el, index) => {
+                func.call(el, el, index);
+            });
+        } else {
+            func.call(this.element, this.element, 0);
+        }
+        return this;
+    }
     static getIdFromSelector(selector) {
         const selectors = selector.split(' ');
         const lastSelector = selectors[selectors.length - 1];
