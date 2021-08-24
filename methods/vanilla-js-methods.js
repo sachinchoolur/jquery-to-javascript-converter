@@ -401,6 +401,12 @@ export class Utils {
             el.style.display = 'none';
         });
     }
+
+    show() {
+        this.each((el) => {
+            el.style.display = '';
+        });
+    }
     static generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
             // eslint-disable-next-line no-bitwise
