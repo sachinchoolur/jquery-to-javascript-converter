@@ -5,7 +5,7 @@ const estraverse = require('estraverse');
 const espree = require('espree');
 
 const prettier = require('prettier');
-const alljQueryMethods = require('./all-methods.js');
+const alljQueryMethods = require('./all-methods');
 
 function traverse(node) {
     while (node) {
