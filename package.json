@@ -1,7 +1,7 @@
 {
   "name": "replace-jquery",
-  "version": "1.0.0",
-  "description": "automatically remove jquery",
+  "version": "0.0.1-beta.0",
+  "description": "Automatically find and generate vanilla js alternatives for jQuery methods.",
   "main": "index.js",
   "scripts": {
     "build": "rollup -c rollup.config.js -w",
