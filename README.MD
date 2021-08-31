@@ -6,7 +6,7 @@
 
 # Automatically replace jQuery
 
-Automatically find and generate vanilla js alternatives for jQuery methods.
+Automatically find jQuery methods from existing projects and generate vanilla js alternatives.
 
 <https://user-images.githubusercontent.com/6586706/130726188-74b18fc2-5545-47fc-8df9-a8227f07d342.mp4>
 
