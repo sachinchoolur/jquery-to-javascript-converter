@@ -1,2 +1,3 @@
-console.log($utils('window').find('#btn'))
-console.log($utils('document').find('#btn'))
+const $ = $utils.default;
+const prevBtn = $('.btn').next();
+console.log(prevBtn);
