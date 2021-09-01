@@ -4,7 +4,8 @@
   "description": "Automatically find and generate vanilla js alternatives for jQuery methods.",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c rollup.config.js -w",
+    "build": "rollup -c rollup.config.js",
+    "build:watch": "rollup -c rollup.config.js -w",
     "make-badges": "istanbul-badges-readme",
     "test": "jest --coverage",
     "lint:scripts": "eslint 'src/**/*.js'",
