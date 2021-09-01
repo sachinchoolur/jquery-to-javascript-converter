@@ -7,21 +7,22 @@ describe('Find method', () => {
         document.body.innerHTML = `<div class="level1">
             <div id="level2">
                 <button id="btn">Button1</button>
-                <button id="btn">Button1</button>
                 <button class="btn">Button2</button>
             </div>
         </div>`;
         const $level1 = $utils('.level1');
         const $level2 = $utils('#level1');
-        expect($level1.find('#btn').get()).toHaveTextContent('Button1');
-        expect($level1.find('#level2 #btn').get()).toHaveTextContent('Button1');
-        expect($level1.find('#level2 .btn').first().get()).toHaveTextContent(
+        expect($level1.find('#btn').get(0)).toHaveTextContent('Button1');
+        expect($level1.find('#level2 #btn').get(0)).toHaveTextContent(
+            'Button1'
+        );
+        expect($level1.find('#level2 .btn').get(0)).toHaveTextContent(
             'Button2'
         );
-        expect($level1.find('#btn').get()).toHaveTextContent('Button1');
-        expect($level2.find('#btn').first().get()).toHaveTextContent('Button1');
-        expect($level1.find('.btn').first().get()).toHaveTextContent('Button2');
-        expect($level2.find('.btn').first().get()).toHaveTextContent('Button2');
+        expect($level1.find('#btn').get(0)).toHaveTextContent('Button1');
+        expect($level2.find('#btn').get(0)).toHaveTextContent('Button1');
+        expect($level1.find('.btn').get(0)).toHaveTextContent('Button2');
+        expect($level2.find('.btn').get(0)).toHaveTextContent('Button2');
     });
 });
 describe('First method', () => {
@@ -31,8 +32,8 @@ describe('First method', () => {
             <button class="btn">Button2</button>
             <button id="btn">Button3</button>
         </div>`;
-        expect($utils('.btn').first().get()).toHaveTextContent('Button1');
-        expect($utils('#btn').first().get()).toHaveTextContent('Button3');
+        expect($utils('.btn').get(0)).toHaveTextContent('Button1');
+        expect($utils('#btn').get(0)).toHaveTextContent('Button3');
     });
 });
 describe('eq method', () => {
@@ -42,8 +43,8 @@ describe('eq method', () => {
             <button class="btn">Button2</button>
             <button class="btn">Button3</button>
         </div>`;
-        expect($utils('.btn').eq(2).get()).toHaveTextContent('Button3');
-        expect($utils('.btn').eq(0).get()).toHaveTextContent('Button1');
+        expect($utils('.btn').eq(2).get(0)).toHaveTextContent('Button3');
+        expect($utils('.btn').eq(0).get(0)).toHaveTextContent('Button1');
     });
 });
 describe('parent method', () => {
@@ -53,8 +54,8 @@ describe('parent method', () => {
             <button class="btn">Button2</button>
             <button class="btn">Button3</button>
         </div>`;
-        expect($utils('#btn').parent().get()).toHaveClass('level1');
-        expect($utils('.btn').parent().get()).toHaveClass('level1');
+        expect($utils('#btn').parent().get(0)).toHaveClass('level1');
+        expect($utils('.btn').parent().get(0)).toHaveClass('level1');
     });
 });
 describe('offsetParent method', () => {
@@ -69,7 +70,7 @@ describe('offsetParent method', () => {
                 return this.parentNode;
             },
         });
-        expect($utils('#btn').offsetParent().get()).toHaveClass('level-2');
+        expect($utils('#btn').offsetParent().get(0)).toHaveClass('level-2');
     });
     test('should return this if element does not exist', () => {
         const $ = $utils('#btn-does-not-exist').offsetParent('el');
@@ -84,7 +85,7 @@ describe('children method', () => {
             <button class="btn">Button3</button>
         </div>`;
         expect($utils('.level1').children().get()).toHaveLength(3);
-        expect($utils('.level1').children().first().get()).toHaveTextContent(
+        expect($utils('.level1').children().get(0)).toHaveTextContent(
             'Button1'
         );
     });
@@ -96,10 +97,10 @@ describe('get method', () => {
             <button class="btn">Button2</button>
             <button class="btn">Button3</button>
         </div>`;
-        expect($utils('.level1').children().first().get()).toHaveTextContent(
+        expect($utils('.level1').children().get(0)).toHaveTextContent(
             'Button1'
         );
-        expect($utils('.btn').first().get()).toHaveTextContent('Button2');
+        expect($utils('.btn').get(0)).toHaveTextContent('Button2');
     });
 });
 describe('siblings method', () => {
@@ -109,9 +110,7 @@ describe('siblings method', () => {
             <button class="btn">Button2</button>
             <button class="btn">Button3</button>
         </div>`;
-        expect($utils('#btn').siblings().first().get()).toHaveTextContent(
-            'Button2'
-        );
+        expect($utils('#btn').siblings().get(0)).toHaveTextContent('Button2');
         expect($utils('#btn').siblings().get()).toHaveLength(2);
     });
     test('should return this if element does not exist', () => {
