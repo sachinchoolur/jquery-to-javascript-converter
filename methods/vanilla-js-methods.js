@@ -1,30 +1,19 @@
 export class Utils {
     constructor(selector) {
         this.elements = Utils.getSelector(selector);
-        this.element = this.getFirstEl();
+        this.element = this.get(0);
         return this;
     }
 
     /* $$ Template START $$ */
 
-    getFirstEl() {
-        if (this.elements && this.elements.length !== undefined) {
-            return this.elements[0];
-        }
-        return this.elements;
-    }
-
     each(func) {
-        if (!this.elements) {
+        if (!this.elements.length) {
             return this;
         }
-        if (this.elements.length !== undefined) {
-            [].slice.call(this.elements).forEach((el, index) => {
-                func.call(el, el, index);
-            });
-        } else {
-            func.call(this.element, this.element, 0);
-        }
+        this.elements.forEach((el, index) => {
+            func.call(el, el, index);
+        });
         return this;
     }
 
@@ -221,10 +210,7 @@ export class Utils {
     }
 
     first() {
-        if (this.elements && this.elements.length !== undefined) {
-            return new Utils(this.elements[0]);
-        }
-        return new Utils(this.elements);
+        return new Utils(this.elements[0]);
     }
 
     eq(index) {
@@ -246,7 +232,10 @@ export class Utils {
         return new Utils(this.element.children);
     }
 
-    get() {
+    get(index) {
+        if (index !== undefined) {
+            return this.elements[index];
+        }
         return this.elements;
     }
 
@@ -409,7 +398,7 @@ export class Utils {
     }
 
     clone() {
-        return new Utils(this.getFirstEl().cloneNode(true));
+        return new Utils(this.element.cloneNode(true));
     }
 
     append(html) {
@@ -578,27 +567,23 @@ export class Utils {
         return eventName.split('__EVENT_EMITTER__')[0];
     }
 
-    static getIdFromSelector(selector) {
-        const selectors = selector.split(' ');
-        const lastSelector = selectors[selectors.length - 1];
-        const fl = lastSelector.substring(0, 1);
-        if (fl === '#') {
-            return lastSelector.substring(1);
-        }
-    }
-
     static getSelector(selector, context) {
-        if (typeof selector !== 'string') {
-            return selector;
+        if (selector && typeof selector !== 'string') {
+            if (selector.length !== undefined) {
+                return selector;
+            }
+            return [selector];
         }
         context = context || document;
 
         // For performance reasons, use getElementById
-        const id = Utils.getIdFromSelector(selector);
-        if (id) {
-            return document.getElementById(id);
+        // eslint-disable-next-line no-control-regex
+        const idRegex = /^#(?:[\w-]|\\.|[^\x00-\xa0])*$/;
+        if (idRegex.test(selector)) {
+            const el = document.getElementById(selector.substring(1));
+            return el ? [el] : [];
         }
-        return context.querySelectorAll(selector);
+        return [].slice.call(context.querySelectorAll(selector) || []);
     }
 
     static styleSupport(prop) {
