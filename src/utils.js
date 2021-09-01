@@ -209,7 +209,7 @@ async function generateAlternativeMethods(methodsToGenerate, outputFileName) {
 
     console.log(
         colors.green(
-            `Done!. Generated ${
+            `Done!. Generated ${outputFileName} with ${
                 methodsToGenerate.length - remainingMethods.length
             } jQuery alternative methods.`
         )

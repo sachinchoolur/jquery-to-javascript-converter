@@ -26,10 +26,15 @@ const replaceJQuery = async function main() {
     }
     const files = await fg(process.argv[2], { dot: true });
 
+    if (!files.length) {
+        console.log(colors.red('No files found!'));
+        return;
+    }
+
     const methods = await getMethodsFromFiles(files);
 
     if (!methods.length) {
-        colors.red('Could not find any jQuery methods');
+        console.log(colors.red('Could not find any jQuery methods'));
         return;
     }
 
