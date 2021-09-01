@@ -68,64 +68,66 @@ Note: The below code is just to demonstrate the basics concepts and not covered 
 
 ```js
 export class Utils {
-	constructor(selector) {
-		this.elements = Utils.getSelector(selector);
-		this.element = this.getFirstEl();
-		return this;
-	}
+  constructor(selector) {
+    this.elements = Utils.getSelector(selector);
+    this.element = this.get(0);
+    return this;
+  }
 
-	static getSelector(selector, context = document) {
-		if (typeof selector !== 'string') {
-			return selector;
-		}
-		return context.querySelectorAll(selector);
-	}
+  static getSelector(selector, context = document) {
+    if (typeof selector !== 'string') {
+      return selector;
+    }
+    if (isId(selector)) {
+      return document.getElementById(selector.substring(1))
+    }
+    return context.querySelectorAll(selector);
+  }
 
-	getFirstEl() {
-		if (this.elements && this.elements.length !== undefined) {
-			return this.elements[0];
-		}
-		return this.elements;
-	}
+  each(func) {
+    if (!this.elements) {
+      return this;
+    }
+    if (this.elements.length !== undefined) {
+      [].forEach.call(this.elements, func);
+    } else {
+      func(this.element, 0);
+    }
+    return this;
+  }
 
-	each(func) {
-		if (!this.elements) {
-			return this;
-		}
-		if (this.elements.length !== undefined) {
-			[].forEach.call(this.elements, func);
-		} else {
-			func(this.element, 0);
-		}
-		return this;
-	}
+  siblings() {
+    if (!this.element) {
+      return this;
+    }
+    const elements = [].filter.call(
+      this.element.parentNode.children,
+      (child) => child !== this.element
+    );
+    return new Utils(elements);
+  }
 
-	siblings() {
-		if (!this.element) {
-			return this;
-		}
-		const elements = [].filter.call(
-			this.element.parentNode.children,
-			(child) => child !== this.element
-		);
-		return new Utils(elements);
-	}
+  get(index) {
+    if (index !== undefined) {
+      return this.elements[index];
+    }
+    return this.elements;
+  }
 
-	addClass(classNames = '') {
-		this.each((el) => {
-			// IE doesn't support multiple arguments
-			classNames.split(' ').forEach((className) => {
-				el.classList.add(className);
-			});
-		});
-		return this;
-	}
+  addClass(classNames = '') {
+    this.each((el) => {
+      // IE doesn't support multiple arguments
+      classNames.split(' ').forEach((className) => {
+        el.classList.add(className);
+      });
+    });
+    return this;
+  }
 }
 
 export default function $utils(selector) {
-	return new Utils(selector);
+  return new Utils(selector);
 }
-
 ```
 
 #### Usage
