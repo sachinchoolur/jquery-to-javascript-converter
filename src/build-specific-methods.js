@@ -5,7 +5,7 @@ const utils = require('./utils');
 
 const options = program.opts();
 
-const buildSpecificMethods = async function main(config = {}) {
+const buildSpecificMethods = async function main() {
     const outputFile = options.output;
     if (!outputFile) {
         console.log(

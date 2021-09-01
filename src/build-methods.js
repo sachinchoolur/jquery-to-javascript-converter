@@ -10,7 +10,7 @@ const alljQueryMethods = require('./all-methods');
 
 const options = program.opts();
 
-const buildFromOptions = async function main(config = {}) {
+const buildFromOptions = async function main() {
     const vanillaJsMethodsSource = await fs.readFileSync(
         path.resolve(__dirname, '../methods/vanilla-js-methods.js'),
         'utf8'
