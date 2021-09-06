@@ -820,3 +820,5 @@ wrap(className) {
   return this;
 }
 ```
+
+#### Browser support - IE 11+
