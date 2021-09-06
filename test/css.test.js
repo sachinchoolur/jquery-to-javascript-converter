@@ -30,7 +30,7 @@ describe('attr method', () => {
     test('Should be get vendor prefix', () => {
         Object.defineProperties(window.HTMLElement.prototype, {
             style: {
-                get: function () {
+                get() {
                     return {
                         WebkitTextStrokeColor: 'red',
                     };
@@ -46,7 +46,6 @@ describe('attr method', () => {
 
         document.body.innerHTML = `<button class="btn">Button</button>`;
         const strokeColor = $utils('.btn').css('text-stroke-color');
-        console.log(strokeColor);
         expect(strokeColor).toBe('red');
     });
 });
