@@ -7,12 +7,12 @@ describe('offset method', () => {
         document.body.innerHTML = `<div class="el"></div>`;
         Object.defineProperties(window.HTMLElement.prototype, {
             offsetLeft: {
-                get: function () {
+                get () {
                     return 200;
                 },
             },
             offsetTop: {
-                get: function () {
+                get () {
                     return 200;
                 },
             },

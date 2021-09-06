@@ -18,7 +18,7 @@ describe('outer height method', () => {
     test('Should be able to return outer height of the element', () => {
         Object.defineProperties(window.HTMLElement.prototype, {
             offsetHeight: {
-                get: function () {
+                get () {
                     const style = window.getComputedStyle(this);
                     return (
                         parseFloat(style.height) +
@@ -35,7 +35,7 @@ describe('outer height method', () => {
     test('Should be able to return outer height of the element including margin', () => {
         Object.defineProperties(window.HTMLElement.prototype, {
             offsetHeight: {
-                get: function () {
+                get () {
                     const style = window.getComputedStyle(this);
                     return (
                         parseFloat(style.height) +

@@ -18,7 +18,7 @@ describe('outer width method', () => {
     test('Should be able to return outer width of the element', () => {
         Object.defineProperties(window.HTMLElement.prototype, {
             offsetWidth: {
-                get: function () {
+                get () {
                     const style = window.getComputedStyle(this);
                     return (
                         parseFloat(style.width) +
@@ -39,7 +39,7 @@ describe('outer width method', () => {
     test('Should be able to return outer width of the element including margin', () => {
         Object.defineProperties(window.HTMLElement.prototype, {
             offsetWidth: {
-                get: function () {
+                get () {
                     const style = window.getComputedStyle(this);
                     return (
                         parseFloat(style.width) +

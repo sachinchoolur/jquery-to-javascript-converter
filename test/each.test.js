@@ -6,8 +6,8 @@ import $utils, { Utils } from '../methods/vanilla-js-methods.js';
 describe('Each method', () => {
     test('should be able to iterate through HTML collection', () => {
         document.body.innerHTML = `<button class="btn">Button</button><button class="btn">Button</button>`;
-        let indexes = [];
-        let elements = [];
+        const indexes = [];
+        const elements = [];
         $utils('.btn').each((el, index) => {
             indexes.push(index);
             elements.push(el);
@@ -21,8 +21,8 @@ describe('Each method', () => {
     });
     test('should work on single DOM element', () => {
         document.body.innerHTML = `<button id="btn">Button</button>`;
-        let indexes = [];
-        let elements = [];
+        const indexes = [];
+        const elements = [];
         $utils('#btn').each((el, index) => {
             indexes.push(index);
             elements.push(el);

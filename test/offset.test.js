@@ -5,8 +5,8 @@ import $utils from '../methods/vanilla-js-methods.js';
 function createMockDiv(width, height) {
     const div = document.createElement('div');
     Object.assign(div.style, {
-        width: width + 'px',
-        height: height + 'px',
+        width: `${width  }px`,
+        height: `${height  }px`,
     });
     div.className = 'div-el';
     // we have to mock this for jsdom.
@@ -27,12 +27,12 @@ describe('offset method', () => {
         window.pageXOffset = 500;
         Object.defineProperties(window.HTMLElement.prototype, {
             clientTop: {
-                get: function () {
+                get () {
                     return 200;
                 },
             },
             clientLeft: {
-                get: function () {
+                get () {
                     return 200;
                 },
             },
