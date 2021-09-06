@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+            .highlight {
+                background-color: red;
+                color: #fff;
+            }
+        </style>
+    </head>
     <body>
-        <h1>The input value attribute</h1>
+        <h2>JavaScript Frameworks</h2>
+        <ul>
+            <li class="jquery">jQuery</li>
+            <li class="react">React</li>
+            <li class="vue">Vue.js</li>
+            <li class="angular">Angular</li>
+            <li class="lit">Lit</li>
+        </ul>
 
-        <p>
-            The value attribute specifies an initial value for an input field:
-        </p>
-        <button class="btn">Button</button><button class="btn-1">Button</button>
+        <button id="highlight">Highlight except Vue.js</button>
+        <button id="highlight-jquery">Highlight jQuery</button>
 
-        <script src="output/vanilla-js-methods.js"></script>
+        <button id="remove-styles">Remove Styles</button>
 
-        <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script-->
-
-        <script src="demo.js"></script>
+        <script src="utils.js"></script>
+        <script src="main.js"></script>
     </body>
 </html>
