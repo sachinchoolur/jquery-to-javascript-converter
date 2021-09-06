@@ -26,7 +26,8 @@ function traverse(node) {
         }
     }
 }
-
+// Detect jQuery methods
+// @tod Add an option to pass regex for finding jQuery methods
 function isjQuery(node) {
     const id = traverse(node);
     return (
