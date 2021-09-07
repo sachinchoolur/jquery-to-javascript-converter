@@ -20,7 +20,7 @@ And in most of the cases, I didn't want to support all the edge cases or legacy 
 You can install replace-jQuery using npm:
 
 ```sh
-npm install -g replace-jQuery
+npm install -g replace-jquery
 ```
 
 -   Find all jQuery methods from `sample.js` and write vanillaJs alternatives in out.js
