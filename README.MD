@@ -1,3 +1,6 @@
+![npm](https://img.shields.io/npm/v/replace-jquery.svg?color=red)
+![license](https://badgen.net/github/license/sachinchoolur/replace-jquery)
+
 #### Test coverage
 
 | Statements                                                                      | Functions                                                                   | Lines                                                               |
