@@ -208,13 +208,15 @@ async function generateAlternativeMethods(methodsToGenerate, outputFileName) {
 
     await fs.outputFile(outputFileName, formattedOutput);
 
-    console.log(
-        colors.green(
-            `Done!. Generated ${outputFileName} with ${
-                methodsToGenerate.length - remainingMethods.length
-            } jQuery alternative methods.`
-        )
-    );
+    if (methodsToGenerate.length - remainingMethods.length) {
+        console.log(
+            colors.green(
+                `Done!. Generated ${outputFileName} with ${
+                    methodsToGenerate.length - remainingMethods.length
+                } jQuery alternative methods.`
+            )
+        );
+    }
     if (remainingMethods.length) {
         console.log(
             colors.red(
