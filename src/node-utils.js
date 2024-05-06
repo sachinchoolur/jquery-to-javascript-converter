@@ -18,9 +18,8 @@ async function getjQueryMethodsFromFile(file) {
 }
 
 async function generateAlternativeMethodsFromFile(methodsToGenerate, outputFileName) {
-    
     const methodsFileData = await fs.readFileSync(
-        path.resolve(__dirname, 'methods/vanilla-js-methods.js'),
+        path.resolve(__dirname, '../methods/vanilla-js-methods.js'),
         'utf8'
         );
     console.log('methodsFileData', methodsFileData)

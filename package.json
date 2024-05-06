@@ -71,16 +71,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sachinchoolur/replace-jquery.git"
+    "url": "git+https://github.com/sachinchoolur/jquery-to-javascript-converter.git"
   },
   "keywords": [
     "jquery"
   ],
   "bugs": {
-    "url": "https://github.com/sachinchoolur/replace-jquery/issues"
+    "url": "https://github.com/sachinchoolur/jquery-to-javascript-converter/issues"
   },
-  "homepage": "https://github.com/sachinchoolur/replace-jquery#readme",
+  "homepage": "https://github.com/sachinchoolur/jquery-to-javascript-converter#readme",
   "bin": {
-    "replace-jquery": "./cli.js"
+    "jquery-to-js": "./cli.js"
   }
 }
