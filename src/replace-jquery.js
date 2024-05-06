@@ -4,7 +4,7 @@ const prompts = require('prompts');
 const fg = require('fast-glob');
 
 const { program } = require('commander');
-const utils = require('./utils');
+const nodeUtils = require('./node-utils');
 
 const options = program.opts();
 
@@ -13,7 +13,7 @@ const outputFile = options.output || process.argv[3];
 async function getMethodsFromFiles(files) {
     let methods = [];
     for (const file of files) {
-        const methodsFromFile = await utils.getjQueryMethodsFromFile(file);
+        const methodsFromFile = await nodeUtils.getjQueryMethodsFromFile(file);
         methods = [...methodsFromFile, ...methods];
     }
     return methods;
@@ -59,7 +59,7 @@ const replaceJQuery = async function main() {
         hint: '- Space to select. Return to submit',
     });
 
-    utils.generateAlternativeMethods(
+    nodeUtils.generateAlternativeMethodsFromFile(
         response.value,
         outputFile || 'replace-jquery-output.js'
     );

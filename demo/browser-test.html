@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        textarea {
+            width: 49vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <textarea id="source"></textarea>
+    <textarea id="output"></textarea>
+    <!-- <h2>JavaScript Frameworks</h2>
+        <ul>
+            <li class="jquery">jQuery</li>
+            <li class="react">React</li>
+            <li class="vue">Vue.js</li>
+            <li class="angular">Angular</li>
+            <li class="lit">Lit</li>
+        </ul>
+
+        <button id="highlight">Highlight except Vue.js</button>
+        <button id="highlight-jquery">Highlight jQuery</button>
+
+        <button id="remove-styles">Remove Styles</button> -->
+
+    <!-- <script src="espree.browser.js"></script>
+        <script src="estraverse.browser.js"></script>
+        <script src="replace-jquery-browser.js"></script> -->
+    <script src="https://unpkg.com/prettier@3.2.5/standalone.js"></script>
+    <script src="https://unpkg.com/prettier@3.2.5/plugins/babel.js"></script>
+    <script src="https://unpkg.com/prettier@3.2.5/plugins/estree.js"></script>
+
+    <script src="../dist/replace-jquery-browser.js"></script>
+    <script>
+        var source = `
+$('#highlight').on('click', () => {
+    $('.vue').siblings().addClass('highlight');
+});
+$('#highlight-jquery').on('click', () => {
+    $('.jquery').css({
+        'font-weight': 'bold',
+        'font-style': 'italic',
+        color: 'yellow',
+    });
+});
+$('#remove-styles').on('click', () => {
+    $('ul li').removeAttr('style').removeClass('highlight');
+});`
+        document.getElementById('source').addEventListener('change', async (e) => {
+            var source = e.target.value
+            console.log('source', source)
+            const output = await ReplaceJquery(source)
+            console.log('output', output)
+            var $output = document.getElementById('output')
+            $output.value = output;
+        })
+    </script>
+</body>
+
+</html>

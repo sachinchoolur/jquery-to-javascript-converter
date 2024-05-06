@@ -1,7 +1,7 @@
 const colors = require('colors/safe');
 
 const { program } = require('commander');
-const utils = require('./utils');
+const nodeUtils = require('./node-utils');
 
 const options = program.opts();
 
@@ -14,7 +14,7 @@ const buildSpecificMethods = async function main() {
             )
         );
     }
-    utils.generateAlternativeMethods(
+    nodeUtils.generateAlternativeMethodsFromFile(
         options.methods.split(',').map((s) => s.trim()),
         outputFile || 'replace-jquery-output.js'
     );

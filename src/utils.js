@@ -1,10 +1,5 @@
-const colors = require('colors/safe');
-const fs = require('fs-extra');
-const path = require('path');
-const estraverse = require('estraverse');
 const espree = require('espree');
-
-const prettier = require('prettier');
+const estraverse = require('estraverse');
 const alljQueryMethods = require('./all-methods');
 
 function traverse(node) {
@@ -44,54 +39,6 @@ function getAST(data) {
     });
 }
 
-async function getjQueryMethodsFromFile(file) {
-    console.log(
-        colors.yellow(`Finding jQuery function reference in ${file} ...`)
-    );
-
-    const data = await fs.readFileSync(file, 'utf8');
-    const ast = getAST(data);
-    const jQFns = [];
-    estraverse.traverse(ast, {
-        enter(node) {
-            if (node.callee && node.callee.type === 'MemberExpression') {
-                if (isjQuery(node)) {
-                    jQFns.push(node.callee.property.name);
-                }
-            }
-        },
-    });
-
-    const jQFnsSet = new Set(jQFns);
-    const alljQMethodsSet = new Set(alljQueryMethods);
-    const intersection = new Set(
-        [...jQFnsSet].filter((method) => alljQMethodsSet.has(method))
-    );
-    return [...intersection];
-}
-
-const getTemplateData = (data, astMethods) => {
-    const templateLines = {
-        start: 0,
-        end: 0,
-    };
-    astMethods.comments.forEach((comment) => {
-        if (comment.type === 'Block') {
-            if (comment.value.includes('$$ Template START $$')) {
-                templateLines.start = comment.start;
-            } else if (comment.value.includes('$$ Template END $$')) {
-                templateLines.end = comment.end;
-            }
-        }
-    });
-
-    const outputStart = data.substring(0, templateLines.start);
-    const outputEnd = data.substring(templateLines.end, data.length);
-    return {
-        outputStart,
-        outputEnd,
-    };
-};
 async function getDependedMethods(
     methodsFileData,
     baseMethods,
@@ -145,14 +92,32 @@ async function getDependedMethods(
     return { methodsData, allMethods };
 }
 
-async function generateAlternativeMethods(methodsToGenerate, outputFileName) {
+const getTemplateData = (data, astMethods) => {
+    const templateLines = {
+        start: 0,
+        end: 0,
+    };
+    astMethods.comments.forEach((comment) => {
+        if (comment.type === 'Block') {
+            if (comment.value.includes('$$ Template START $$')) {
+                templateLines.start = comment.start;
+            } else if (comment.value.includes('$$ Template END $$')) {
+                templateLines.end = comment.end;
+            }
+        }
+    });
+
+    const outputStart = data.substring(0, templateLines.start);
+    const outputEnd = data.substring(templateLines.end, data.length);
+    return {
+        outputStart,
+        outputEnd,
+    };
+};
+
+
+async function generateAlternativeMethods(methodsToGenerate, methodsFileData) {
     const lineRef = {};
-
-    const methodsFileData = await fs.readFileSync(
-        path.resolve(__dirname, '../methods/vanilla-js-methods.js'),
-        'utf8'
-    );
-
     const astMethods = getAST(methodsFileData);
 
     estraverse.traverse(astMethods, {
@@ -196,42 +161,38 @@ async function generateAlternativeMethods(methodsToGenerate, outputFileName) {
         outputStart,
         outputEnd
     );
-
-    const formattedOutput = prettier.format(
-        outputStart + baseMethods + remainingMethodData.methodsData + outputEnd,
-        {
-            parser: 'babel',
-            tabWidth: 4,
-            singleQuote: true,
-        }
-    );
-
-    await fs.outputFile(outputFileName, formattedOutput);
-
-    if (methodsToGenerate.length - remainingMethods.length) {
-        console.log(
-            colors.green(
-                `Done!. Generated ${outputFileName} with ${
-                    methodsToGenerate.length - remainingMethods.length
-                } jQuery alternative methods.`
-            )
-        );
-    }
-    if (remainingMethods.length) {
-        console.log(
-            colors.red(
-                `Did not generate vanillaJs methods for ${remainingMethods.join(
-                    ','
-                )}, Please consider replacing manually`
-            )
-        );
-    }
+    return {
+        data: outputStart + baseMethods + remainingMethodData.methodsData + outputEnd,
+        remainingMethods,
+    };
 }
+
+async function getJQueryMethodsFromSource(data) {
+    const ast = getAST(data);
+    const jQFns = [];
+    estraverse.traverse(ast, {
+        enter(node) {
+            if (node.callee && node.callee.type === 'MemberExpression') {
+                if (isjQuery(node)) {
+                    jQFns.push(node.callee.property.name);
+                }
+            }
+        },
+    });
+
+    const jQFnsSet = new Set(jQFns);
+    const alljQMethodsSet = new Set(alljQueryMethods);
+    const intersection = new Set(
+        [...jQFnsSet].filter((method) => alljQMethodsSet.has(method))
+    );
+    return [...intersection];
+}
+
 
 module.exports = {
     traverse,
     isjQuery,
     getAST,
-    getjQueryMethodsFromFile,
     generateAlternativeMethods,
+    getJQueryMethodsFromSource
 };
