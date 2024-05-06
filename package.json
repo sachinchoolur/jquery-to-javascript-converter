@@ -1,0 +1,86 @@
+{
+  "name": "replace-jquery",
+  "version": "0.0.2",
+  "description": "Automatically find and generate vanilla js alternatives for jQuery methods.",
+  "source": "src/replace-jquery-browser.js",
+  "main": "dist/main.js",
+  "outputFormat": "global",
+  "isLibrary": "false",
+  "targets": {
+    "umd": {
+      "context": "browser",
+      "includeNodeModules": true,
+      "engines": {
+        "browsers": [
+          "last 1 version"
+        ]
+      },
+      "outputFormat": "global",
+      "distDir": "./dist",
+      "sourceMap": true,
+      "publicUrl": "./"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "build:watch": "rollup -c rollup.config.js -w",
+    "make-badges": "istanbul-badges-readme",
+    "test": "jest --coverage",
+    "lint:scripts": "eslint 'src/**/*.js'",
+    "lint:methods": "eslint 'methods/**/*.js'",
+    "test:watch": "jest --watch --coverage",
+    "postinstall": "node tools/build-all-jquery-methods.js",
+    "watch:browser": "parcel watch",
+    "build:browser": "parcel build"
+  },
+  "author": "Sachin Neravath",
+  "license": "MIT",
+  "dependencies": {
+    "babylon": "^6.18.0",
+    "browserify": "^17.0.0",
+    "colors": "^1.4.0",
+    "commander": "^7.2.0",
+    "espree": "^7.3.1",
+    "estraverse": "^4.3.0",
+    "estree-walker": "^3.0.0",
+    "fast-glob": "^3.2.6",
+    "fs-extra": "^10.0.0",
+    "jquery": "^3.6.0",
+    "jsdom": "^16.6.0",
+    "prettier": "2.3.1",
+    "prompts": "^2.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.5",
+    "@parcel/transformer-inline-string": "^2.12.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@testing-library/dom": "^7.31.2",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/user-event": "^13.1.9",
+    "babel-jest": "^27.0.2",
+    "buffer": "^6.0.3",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "istanbul-badges-readme": "^1.4.0",
+    "jest": "^27.0.4",
+    "parcel": "^2.12.0",
+    "shelljs": "^0.8.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sachinchoolur/replace-jquery.git"
+  },
+  "keywords": [
+    "jquery"
+  ],
+  "bugs": {
+    "url": "https://github.com/sachinchoolur/replace-jquery/issues"
+  },
+  "homepage": "https://github.com/sachinchoolur/replace-jquery#readme",
+  "bin": {
+    "replace-jquery": "./cli.js"
+  }
+}
