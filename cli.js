@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-var package = require('./package.json');
+const { program } = require('commander');
+const packageDetails = require('./package.json');
 
 const replaceJQuery = require('./src/replace-jquery');
 const buildFromOptions = require('./src/build-methods');
 const buildSpecificMethods = require('./src/build-specific-methods');
 
-const { program } = require('commander');
 
 program
   .option('-o, --output <type>', 'output file')
@@ -16,8 +16,8 @@ program
 program.parse(process.argv);
 const options = program.opts();
 if(options.version) {
-    console.log(package.version)
-    return 
+    console.log(packageDetails.version)
+    return;
 }
 
 (async function() {
