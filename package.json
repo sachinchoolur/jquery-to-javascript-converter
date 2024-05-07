@@ -2,7 +2,7 @@
   "name": "jquery-to-js",
   "version": "0.1.2",
   "description": "Automatically find and generate vanilla js alternatives for jQuery methods.",
-  "source": "src/replace-jquery-browser.js",
+  "source": "src/jquery-to-js-browser.js",
   "main": "dist/main.js",
   "outputFormat": "global",
   "isLibrary": "false",

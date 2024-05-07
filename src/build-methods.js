@@ -35,13 +35,13 @@ const buildFromOptions = async function main() {
     if (!outputFile) {
         console.log(
             colors.yellow(
-                'No output file specified. outputting to replace-jquery-output.js'
+                'No output file specified. outputting to jquery-to-js-output.js'
             )
         );
     }
     nodeUtils.generateAlternativeMethodsFromFile(
         response.value,
-        outputFile || 'replace-jquery-output.js'
+        outputFile || 'jquery-to-js-output.js'
     );
 };
 

@@ -2,7 +2,7 @@
 const { program } = require('commander');
 const packageDetails = require('./package.json');
 
-const replaceJQuery = require('./src/replace-jquery');
+const replaceJQuery = require('./src/jquery-to-js');
 const buildFromOptions = require('./src/build-methods');
 const buildSpecificMethods = require('./src/build-specific-methods');
 

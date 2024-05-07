@@ -10,13 +10,13 @@ const buildSpecificMethods = async function main() {
     if (!outputFile) {
         console.log(
             colors.yellow(
-                'No output file specified. outputting to replace-jquery-output.js'
+                'No output file specified. outputting to jquery-to-js-output.js'
             )
         );
     }
     nodeUtils.generateAlternativeMethodsFromFile(
         options.methods.split(',').map((s) => s.trim()),
-        outputFile || 'replace-jquery-output.js'
+        outputFile || 'jquery-to-js-output.js'
     );
 };
 
