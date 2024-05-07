@@ -1,5 +1,5 @@
 ![npm](https://img.shields.io/npm/v/jquery-to-js.svg?color=red)
-![license](https://badgen.net/github/license/sachinchoolur/jquery-to-js)
+![license](https://badgen.net/github/license/sachinchoolur/jquery-to-javascript-converter)
 
 #### Test coverage
 
