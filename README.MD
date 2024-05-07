@@ -154,6 +154,9 @@ Similarly, all the examples you see below, will add it's dependencies when you g
 ## List of jQuery alternative methods in alphabetical order
 
 ##### addClass
+Adds the specified class(es) to each element in the set of matched elements.
+
+
 
 ```js
 addClass(classNames = '') {
@@ -172,7 +175,7 @@ $utils('ul li').addClass('myClass yourClass');
 ```
 
 ##### append
-
+Insert content, specified by the parameter, to the end of each element in the set of matched elements.
 ```js
 append(html) {
   this.each((el) => {
@@ -187,6 +190,7 @@ append(html) {
 ```
 
 ##### attr
+Get the value of an attribute for the first element in the set of matched elements or set one or more attributes for every matched element.
 
 ```js
 attr(name, value) {
@@ -204,7 +208,7 @@ attr(name, value) {
 ```
 
 ##### children
-
+Get the children of each element in the set of matched elements, optionally filtered by a selector.
 ```js
 children() {
   return new Utils(this.element.children);
@@ -212,7 +216,7 @@ children() {
 ```
 
 ##### closest
-
+For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.
 ```js
 closest(selector) {
   if (!this.element) {
@@ -235,7 +239,7 @@ closest(selector) {
 ```
 
 ##### css
-
+Get the computed style properties for the first element in the set of matched elements.
 ```js
 css(css, value) {
   if (value !== undefined) {
@@ -261,7 +265,7 @@ css(css, value) {
 ```
 
 ##### data
-
+Store arbitrary data associated with the matched elements.
 ```js
 data(name, value) {
   return this.attr(`data-${name}`, value);
@@ -269,7 +273,7 @@ data(name, value) {
 ```
 
 ##### each
-
+Iterate over a jQuery object, executing a function for each matched element.
 ```js
 each(func) {
     if (!this.elements) {
@@ -287,7 +291,7 @@ each(func) {
 ```
 
 ##### empty
-
+Remove all child nodes of the set of matched elements from the DOM.
 ```js
 empty() {
   this.each((el) => {
@@ -298,7 +302,7 @@ empty() {
 ```
 
 ##### eq
-
+Reduce the set of matched elements to the one at the specified index.
 ```js
 eq(index) {
   return new Utils(this.elements[index]);
@@ -306,7 +310,7 @@ eq(index) {
 ```
 
 ##### find
-
+Get the descendants of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
 ```js
 find(selector) {
   return new Utils(Utils.getSelector(selector, this.element));
@@ -314,7 +318,7 @@ find(selector) {
 ```
 
 ##### first
-
+Reduce the set of matched elements to the first in the set.
 ```js
 first() {
   if (this.elements && this.elements.length !== undefined) {
@@ -325,7 +329,7 @@ first() {
 ```
 
 ##### get
-
+Load data from the server using a HTTP GET request.
 ```js
 get() {
   return this.elements;
@@ -333,7 +337,7 @@ get() {
 ```
 
 ##### hasClass
-
+Determine whether any of the matched elements are assigned the given class.
 ```js
 hasClass(className) {
   if (!this.element) {
@@ -344,7 +348,7 @@ hasClass(className) {
 ```
 
 ##### height
-
+Get the current computed height for the first element in the set of matched elements.
 ```js
 height() {
   if (!this.element) {
@@ -356,7 +360,7 @@ height() {
 ```
 
 ##### html
-
+Get the HTML contents of the first element in the set of matched elements.
 ```js
 html(html) {
   if (html === undefined) {
@@ -374,6 +378,7 @@ html(html) {
 
 ##### index
 
+Search for a given element from among the matched elements.
 ```js
 index() {
   if (!this.element) return -1;
@@ -386,7 +391,7 @@ index() {
 ```
 
 ##### is
-
+Check the current matched set of elements against a selector, element, or jQuery object and return true if at least one of these elements matches the given arguments.
 ```js
 is(el) {
   if (typeof el === 'string') {
@@ -404,7 +409,7 @@ is(el) {
 ```
 
 ##### next
-
+Get the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector.
 ```js
 next() {
   if (!this.element) {
@@ -415,7 +420,7 @@ next() {
 ```
 
 ##### nextAll
-
+Get all following siblings of each element in the set of matched elements, optionally filtered by a selector.
 ```js
 nextAll(filter) {
   if (!this.element) {
@@ -438,7 +443,7 @@ nextAll(filter) {
 ```
 
 ##### off
-
+Remove an event handler.
 ```js
 off(event) {
   if (!this.elements) {
@@ -462,7 +467,7 @@ off(event) {
 ```
 
 ##### offset
-
+Get the current coordinates of the first element in the set of matched elements, relative to the document.
 ```js
 offset() {
   if (!this.element) {
@@ -486,7 +491,7 @@ offset() {
 ```
 
 ##### offsetParent
-
+Get the closest ancestor element that is positioned.
 ```js
 offsetParent() {
   if (!this.element) {
@@ -497,7 +502,7 @@ offsetParent() {
 ```
 
 ##### on
-
+Attach an event handler function for one or more events to the selected elements.
 ```js
 on(events, listener) {
   if (!this.elements) {
@@ -518,7 +523,7 @@ on(events, listener) {
 ```
 
 ##### one
-
+Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
 ```js
 one(event, listener) {
   this.each((el) => {
@@ -532,7 +537,7 @@ one(event, listener) {
 ```
 
 ##### outerHeight
-
+Get the current computed outer height (including padding, border, and optionally margin) for the first element in the set of matched elements.
 ```js
 outerHeight(margin) {
   if (!this.element) {
@@ -552,7 +557,7 @@ outerHeight(margin) {
 ```
 
 ##### outerWidth
-
+Get the current computed outer width (including padding, border, and optionally margin) for the first element in the set of matched elements.
 ```js
 outerWidth(margin) {
   if (!this.element) {
@@ -573,6 +578,7 @@ outerWidth(margin) {
 
 ##### parent
 
+Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
 ```js
 parent() {
   return new Utils(this.element.parentElement);
@@ -580,7 +586,7 @@ parent() {
 ```
 
 ##### parentsUntil
-
+Get the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector, DOM node, or jQuery object. 
 ```js
 parentsUntil(selector, filter) {
   if (!this.element) {
@@ -608,7 +614,7 @@ parentsUntil(selector, filter) {
 ```
 
 ##### position
-
+Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
 ```js
 position() {
   return {
@@ -619,7 +625,7 @@ position() {
 ```
 
 ##### prepend
-
+Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.
 ```js
 prepend(html) {
   this.each((el) => {
@@ -634,7 +640,7 @@ prepend(html) {
 ```
 
 ##### prev
-
+Get the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector.
 ```js
 prev() {
   if (!this.element) {
@@ -645,7 +651,7 @@ prev() {
 ```
 
 ##### prevAll
-
+Get all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order.
 ```js
 prevAll(filter) {
   if (!this.element) {
@@ -663,7 +669,7 @@ prevAll(filter) {
 ```
 
 ##### remove
-
+Remove the set of matched elements from the DOM.
 ```js
 remove() {
   this.each((el) => {
@@ -675,6 +681,7 @@ remove() {
 
 ##### removeAttr
 
+Remove an attribute from each element in the set of matched elements.
 ```js
 removeAttr(attributes) {
   const attrs = attributes.split(' ');
@@ -686,7 +693,7 @@ removeAttr(attributes) {
 ```
 
 ##### removeClass
-
+Remove a single class or multiple classes from each element in the set of matched elements.
 ```js
 removeClass(classNames) {
   this.each((el) => {
@@ -700,7 +707,7 @@ removeClass(classNames) {
 ```
 
 ##### siblings
-
+Get the siblings of each element in the set of matched elements, optionally filtered by a selector.
 ```js
 siblings() {
   if (!this.element) {
@@ -715,7 +722,7 @@ siblings() {
 ```
 
 ##### text
-
+Get the combined text contents of each element in the set of matched elements, including their descendants.
 ```js
 text(text) {
   if (text === undefined) {
@@ -732,7 +739,7 @@ text(text) {
 ```
 
 ##### toggleClass
-
+Add or remove one or more classes from each element in the set of matched elements, depending on either the class’s presence or the value of the state argument.
 ```js
 toggleClass(className) {
   if (!this.element) {
@@ -743,7 +750,7 @@ toggleClass(className) {
 ```
 
 ##### trigger
-
+Execute all handlers and behaviors attached to the matched elements for the given event type.
 ```js
 trigger(event, detail) {
   if (!this.element) {
@@ -769,7 +776,7 @@ trigger(event, detail) {
 ```
 
 ##### unwrap
-
+Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place.
 ```js
 unwrap() {
   this.each((el) => {
@@ -785,7 +792,7 @@ unwrap() {
 ```
 
 ##### val
-
+Get the current value of the first element in the set of matched elements.
 ```js
 val(value) {
   if (!this.element) {
@@ -799,7 +806,7 @@ val(value) {
 ```
 
 ##### width
-
+Get the current computed width for the first element in the set of matched elements.
 ```js
 width() {
   if (!this.element) {
@@ -811,7 +818,7 @@ width() {
 ```
 
 ##### wrap
-
+Wrap an HTML structure around each element in the set of matched elements.
 ```js
 wrap(className) {
   this.each((el) => {
