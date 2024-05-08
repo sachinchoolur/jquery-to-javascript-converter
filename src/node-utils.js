@@ -22,11 +22,8 @@ async function generateAlternativeMethodsFromFile(methodsToGenerate, outputFileN
         path.resolve(__dirname, '../methods/vanilla-js-methods.js'),
         'utf8'
         );
-    console.log('methodsFileData', methodsFileData)
         
-    const generatedMethods = await utils.generateAlternativeMethods(methodsToGenerate, methodsFileData)
-
-    console.log('generatedMethods', generatedMethods)
+    const generatedMethods = await utils.generateAlternativeMethods(methodsToGenerate, methodsFileData);
     const formattedOutput = prettier.format(
         generatedMethods.data,
         {
