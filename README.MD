@@ -7,11 +7,9 @@
 | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | ![Statements](https://img.shields.io/badge/statements-99.64%25-brightgreen.svg) | ![Functions](https://img.shields.io/badge/functions-100%25-brightgreen.svg) | ![Lines](https://img.shields.io/badge/lines-100%25-brightgreen.svg) |
 
-# Automatically replace jQuery
+# jQuery to JavaScript converter
 
 Automatically find jQuery methods from existing projects and generate vanilla js alternatives.
-
-<https://user-images.githubusercontent.com/6586706/130726188-74b18fc2-5545-47fc-8df9-a8227f07d342.mp4>
 
 ## Why
 
